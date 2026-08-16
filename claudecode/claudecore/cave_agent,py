@@ -1,0 +1,22 @@
+from claudecore.agent_base import ClaudeAgent
+from claudecore.event_bus import bus
+
+class CaveAgent(ClaudeAgent):
+    def __init__(self):
+        super().__init__("CaveAgent")
+
+    def generate_stimuli(self):
+        """
+        Minimal placeholder for cave stimuli.
+        Later this becomes labyrinth generation, mythic modifiers, etc.
+        """
+        return {
+            "stimuli": ["pulse", "echo", "shadow"],
+            "intensity": 0.7
+        }
+
+    def run(self):
+        stimuli = self.generate_stimuli()
+        # Emit stimuli event for other agents (OrganismAgent later)
+        bus.emit("stimulus", stimuli)
+        return stimuli
