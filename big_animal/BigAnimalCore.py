@@ -26,14 +26,15 @@ class BigAnimalCore:
         # --- GLOBAL THREATS ---
         self.ww3_escalation = 0.0
 
+        # --- WORLD META ---
+        self.era = "primordial"
+        self.tribes = []
+
         # --- INTERNAL STATE ---
         self.pulse = 0.0
         self.ascension_ready = False
         self.collapse_imminent = False
 
-    # ---------------------------------------------------------
-    # SNAPSHOT INPUT
-    # ---------------------------------------------------------
     def pre_tick(self, snapshot):
         """
         Update core state values from the incoming snapshot.
@@ -43,9 +44,6 @@ class BigAnimalCore:
             if hasattr(self, key):
                 setattr(self, key, value)
 
-    # ---------------------------------------------------------
-    # WORLDHEART + STATE UPDATE
-    # ---------------------------------------------------------
     def tick(self, snapshot):
         """
         Main world update step.
@@ -80,18 +78,10 @@ class BigAnimalCore:
         self.ascension_ready = pulse >= 3.0
         self.collapse_imminent = pulse <= -1.5 and self.ww3_escalation >= 2.0
 
-    # ---------------------------------------------------------
-    # POST-TICK CLEANUP
-    # ---------------------------------------------------------
     def post_tick(self, snapshot=None):
-        """
-        Placeholder for post-tick logic.
-        """
+        """Placeholder for post-tick logic."""
         pass
 
-    # ---------------------------------------------------------
-    # SNAPSHOT OUTPUT
-    # ---------------------------------------------------------
     def snapshot(self):
         """
         Return the full world state after tick.
@@ -115,11 +105,12 @@ class BigAnimalCore:
             "binary": self.binary,
             "techno": self.techno,
 
-            "ww3_escalation": self.ww3_escalation
+            "ww3_escalation": self.ww3_escalation,
+
+            # REQUIRED BY KERNEL
+            "era": self.era,
+            "tribes": self.tribes,
         }
 
-    # ---------------------------------------------------------
-    # RAW DICT EXPORT
-    # ---------------------------------------------------------
     def to_dict(self):
         return self.snapshot()
