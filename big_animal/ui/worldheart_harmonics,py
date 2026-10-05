@@ -1,0 +1,46 @@
+import math
+
+def compute_harmonics(pulse):
+    """
+    Decomposes the worldheart pulse into three harmonic bands:
+    - low frequency (LF): stability / balance
+    - mid frequency (MF): emotional oscillation
+    - high frequency (HF): cognitive spikes
+    """
+
+    # Normalize pulse
+    p = max(-5.0, min(5.0, pulse))
+
+    # Harmonic bands
+    lf = math.sin(p * 0.4) * 0.5 + 0.5      # slow wave
+    mf = math.sin(p * 1.2) * 0.5 + 0.5      # medium wave
+    hf = math.sin(p * 3.5) * 0.5 + 0.5      # fast wave
+
+    return lf, mf, hf
+
+
+def render_harmonics(pulse):
+    """
+    ASCII harmonic visualizer.
+    Shows three frequency bands as bars.
+    """
+
+    lf, mf, hf = compute_harmonics(pulse)
+
+    def bar(value, symbol):
+        length = int(value * 40)
+        return symbol * length
+
+    print("\n=== WORLDHEART HARMONICS ===")
+    print(f"Pulse: {pulse:.2f}")
+
+    print(f"LF (stability) : {bar(lf, '█')}")
+    print(f"MF (emotion)   : {bar(mf, '▓')}")
+    print(f"HF (cognition) : {bar(hf, '░')}")
+
+    # Resonance detection
+    if lf > 0.8 and mf < 0.3 and hf < 0.3:
+        print(">> ASCENSION RESONANCE DETECTED <<")
+
+    if hf > 0.8 and mf > 0.7 and lf < 0.3:
+        print(">> COLLAPSE RESONANCE DETECTED <<")
