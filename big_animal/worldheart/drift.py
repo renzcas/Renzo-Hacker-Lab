@@ -1,4 +1,4 @@
-from ui.worldheart_harmonics import compute_harmonics
+from big_animal.ui.worldheart_harmonics import compute_harmonics
 
 class WorldheartDrift:
     """

@@ -1,46 +1,46 @@
-from organism.organism_state import initial_state
-from organism.predator_prey_loop import organism_step
-from simulation.endgame import EndgameController
+from big_animal.organism.organism_state import initial_state
+from big_animal.organism.predator_prey_loop import organism_step
+from big_animal.simulation.endgame import EndgameController
 
 # Engines (organs)
-from engines.binary.binary_engine import BinaryEngine
-from engines.techno.techno_engine import TechnoEngine
-from engines.industrial.industrial_engine import IndustrialEngine
-from engines.swarm.swarm_engine import SwarmEngine
-from engines.truth.truth_engine import TruthEngine
-from engines.archive.archive_engine import ArchiveEngine
-from engines.pattern.pattern_engine import PatternEngine
-from engines.balance.balance_engine import BalanceEngine
-from engines.decision.decision_engine import DecisionEngine
-from engines.worldheart.worldheart_engine import WorldheartEngine
+from big_animal.engines.binary.binary_engine import BinaryEngine
+from big_animal.engines.techno.techno_engine import TechnoEngine
+from big_animal.engines.industrial.industrial_engine import IndustrialEngine
+from big_animal.engines.swarm.swarm_engine import SwarmEngine
+from big_animal.engines.truth.truth_engine import TruthEngine
+from big_animal.engines.archive.archive_engine import ArchiveEngine
+from big_animal.engines.pattern.pattern_engine import PatternEngine
+from big_animal.engines.balance.balance_engine import BalanceEngine
+from big_animal.engines.decision.decision_engine import DecisionEngine
+from big_animal.engines.worldheart.worldheart_engine import WorldheartEngine
 
 # Events
-from events.event_director import EventDirector
+from big_animal.events.event_director import EventDirector
 
 # Agents (neurons)
-from agents.agent_manager import AgentManager
-from agents.swarm_agents import RoachlingAgent, TunnelBrood
-from agents.truth_agents import IntegrityKnight, AuroraScribe
-from agents.balance_agents import HarmonyWarden, EquinoxGuardian
-from agents.decision_agents import Stormcaller, BranchmindWeaver
+from big_animal.agents.agent_manager import AgentManager
+from big_animal.agents.swarm_agents import RoachlingAgent, TunnelBrood
+from big_animal.agents.truth_agents import IntegrityKnight, AuroraScribe
+from big_animal.agents.balance_agents import HarmonyWarden, EquinoxGuardian
+from big_animal.agents.decision_agents import Stormcaller, BranchmindWeaver
 
 # UI (face)
-from ui.world_ui import WorldUI
+from big_animal.ui.world_ui import WorldUI
 
 # Worldheart subsystems (the full stack)
-from worldheart.influence_matrix import InfluenceMatrix
-from worldheart.feedback_loops import FeedbackLoops
-from worldheart.entropy import OrganEntropy
-from worldheart.recovery import OrganRecovery
-from worldheart.shock import OrganShock
-from worldheart.shielding import OrganShielding
-from worldheart.overdrive import OrganOverdrive
-from worldheart.synchrony import OrganSynchrony
-from worldheart.phase_oscillation import PhaseOscillation
-from worldheart.phase_coupling import PhaseCoupling
-from worldheart.phase_turbulence import PhaseTurbulence
-from worldheart.phase_collapse import PhaseCollapse
-from worldheart.phase_rebirth import PhaseRebirth
+from big_animal.worldheart.influence_matrix import InfluenceMatrix
+from big_animal.worldheart.feedback_loops import FeedbackLoops
+from big_animal.worldheart.entropy import OrganEntropy
+from big_animal.worldheart.recovery import OrganRecovery
+from big_animal.worldheart.shock import OrganShock
+from big_animal.worldheart.shielding import OrganShielding
+from big_animal.worldheart.overdrive import OrganOverdrive
+from big_animal.worldheart.synchrony import OrganSynchrony
+from big_animal.worldheart.phase_oscillation import PhaseOscillation
+from big_animal.worldheart.phase_coupling import PhaseCoupling
+from big_animal.worldheart.phase_turbulence import PhaseTurbulence
+from big_animal.worldheart.phase_collapse import PhaseCollapse
+from big_animal.worldheart.phase_rebirth import PhaseRebirth
 
 
 class WorldOrganism:
@@ -120,8 +120,9 @@ class WorldOrganism:
         """
 
         # 1. Engines update the global state
-        for engine in self.engines.values():
-            engine.update(self.state, dt)
+        for name, engine in self.engines.items():
+            if name != "worldheart":
+                engine.update(self.state, dt)
 
         # 2. Predator–prey loop (heartbeat)
         self.state = organism_step(self.state, dt)
@@ -167,7 +168,7 @@ class WorldOrganism:
         self.phase_collapse.update(self.state, self.phase_coupling, self.phase_turbulence, dt)
 
         # 16. Phase Rebirth (post-collapse rhythmic reconstruction)
-        self.phase_rebirth.update(self.state, self.phase_collapse, self.phase_coupling, dt)
+        self.phase_rebirth.update(self.state, self.phase_coupling, self.phase_collapse, dt)
 
         # 17. Event Director triggers mythic events
         events = self.event_director.update(self.state, dt)
@@ -175,12 +176,10 @@ class WorldOrganism:
         # 18. Agents react to events + state
         self.agents.update(self.state, events, dt)
 
-        # 19. UI renders the organism
-        self.ui.render(self.state, events)
+        # 19. Endgame check
+        events = self.endgame.update(self.state, events, dt)
 
-        # 20. Endgame check
-        end_event = self.endgame.check_endgame(self.state)
-        if end_event:
-            events.append(end_event)
+        # 20. UI renders the organism
+        self.ui.render(self.state, events)
 
         return self.state, events

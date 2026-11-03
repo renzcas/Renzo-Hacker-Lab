@@ -1,4 +1,4 @@
-from organism.world_organism import WorldOrganism
+from big_animal.organism.world_organism import WorldOrganism
 
 class CLICommands:
     """

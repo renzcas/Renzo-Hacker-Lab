@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "projects": [
+    {
+      "id": "agentdash",
+      "name": "AgentDash",
+      "path": "claudecode/claudecore/agentdash",
+      "provides": "Dashboard and operator view",
+      "runs_alone": true,
+      "integrates_with": [
+        "infoengine",
+        "llm-organism",
+        "complexconscious",
+        "rb-app",
+        "cyber-arena",
+        "big-animal",
+        "infophys-pipeline"
+      ],
+      "notes": "Existing cockpit prototype; not yet a standalone service."
+    },
+    {
+      "id": "infoengine",
+      "name": "InfoEngine",
+      "path": "InfoEngine",
+      "provides": "Intelligence and information processing",
+      "runs_alone": true,
+      "integrates_with": [
+        "llm-organism",
+        "complexconscious",
+        "rb-app",
+        "infophys-pipeline"
+      ],
+      "notes": "Present in the workspace; independent run command is not registered."
+    },
+    {
+      "id": "llm-organism",
+      "name": "LLM_Organism",
+      "path": "repos/LLM_Organism",
+      "provides": "Agents",
+      "runs_alone": true,
+      "integrates_with": [
+        "complexconscious",
+        "rb-app",
+        "infophys-pipeline"
+      ],
+      "notes": "Planned repository."
+    },
+    {
+      "id": "complexconscious",
+      "name": "ComplexConscious",
+      "path": "repos/ComplexConscious",
+      "provides": "Decision support",
+      "runs_alone": true,
+      "integrates_with": [
+        "rb-app",
+        "infophys-pipeline"
+      ],
+      "notes": "Planned repository."
+    },
+    {
+      "id": "rb-app",
+      "name": "RB-App",
+      "path": "repos/RB-App",
+      "provides": "Dashboard application",
+      "runs_alone": true,
+      "integrates_with": [
+        "cyber-arena",
+        "infophys-pipeline"
+      ],
+      "notes": "Planned repository."
+    },
+    {
+      "id": "cyber-arena",
+      "name": "Cyber-Arena",
+      "path": "repos/Cyber-Arena",
+      "provides": "Training environment",
+      "runs_alone": true,
+      "integrates_with": [
+        "infophys-pipeline"
+      ],
+      "notes": "Planned repository."
+    },
+    {
+      "id": "big-animal",
+      "name": "BIG_ANIMAL",
+      "path": "big_animal",
+      "provides": "Simulation",
+      "runs_alone": true,
+      "integrates_with": [
+        "infoengine",
+        "infophys-pipeline",
+        "agentdash"
+      ],
+      "notes": "Present in the workspace; independent run command is not registered."
+    },
+    {
+      "id": "red-teaming",
+      "name": "Red_Teaming",
+      "path": "repos/Red_Teaming",
+      "provides": "Red-team research tooling",
+      "runs_alone": true,
+      "integrates_with": [
+        "cyber-arena",
+        "agentdash"
+      ],
+      "notes": "Planned standalone repository; current related scripts are under Renzo-Hacker-Lab/red-team."
+    },
+    {
+      "id": "infophys-pipeline",
+      "name": "INFOPHYS-PIPELINE",
+      "path": "repos/INFOPHYS-PIPELINE",
+      "provides": "Analytics",
+      "runs_alone": true,
+      "integrates_with": [
+        "agentdash"
+      ],
+      "notes": "Planned repository."
+    }
+  ]
+}

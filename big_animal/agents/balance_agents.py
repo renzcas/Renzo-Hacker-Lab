@@ -1,4 +1,4 @@
-from agents.common_behaviors import clamp
+from big_animal.agents.common_behaviors import clamp
 
 class HarmonyWarden:
     """

@@ -22,14 +22,15 @@ class OrganRecovery:
         Apply healing and regeneration effects.
         """
 
-        for organ, value in state.items():
+        for organ in self.healing:
+            value = state.get(organ)
             if not isinstance(value, (int, float)):
                 continue
 
             # --- HEALING MOMENTUM ---
             # Healing increases when organ is low or entropy is high
             low_value_factor = max(0.0, (1.0 - abs(value) / 10.0))
-            entropy_factor = entropy.burnout[organ] * 0.1
+            entropy_factor = entropy.burnout.get(organ, 0.0) * 0.1
 
             self.healing[organ] += (low_value_factor + entropy_factor) * 0.01 * dt
 

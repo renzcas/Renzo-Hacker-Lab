@@ -1,5 +1,5 @@
 import time
-from organism.world_organism import WorldOrganism
+from big_animal.organism.world_organism import WorldOrganism
 
 def run(tick_rate=0.5, max_ticks=None):
     """

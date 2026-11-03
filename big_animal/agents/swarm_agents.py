@@ -1,4 +1,4 @@
-from agents.common_behaviors import clamp, move_toward, random_drift
+from big_animal.agents.common_behaviors import clamp, move_toward, random_drift
 
 class RoachlingAgent:
     """

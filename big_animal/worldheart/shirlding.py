@@ -27,7 +27,8 @@ class OrganShielding:
         Apply shielding effects.
         """
 
-        for organ, value in state.items():
+        for organ in self.shield:
+            value = state.get(organ)
             if not isinstance(value, (int, float)):
                 continue
 

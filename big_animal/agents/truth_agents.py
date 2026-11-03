@@ -1,4 +1,4 @@
-from agents.common_behaviors import clamp, move_toward
+from big_animal.agents.common_behaviors import clamp, move_toward
 
 class IntegrityKnight:
     """
