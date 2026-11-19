@@ -23,3 +23,7 @@ python scripts/lab.py check
 ```
 
 Current Red_Teaming-related scripts live under `Renzo-Hacker-Lab/red-team`; that directory is not yet a standalone repository. AgentDash currently refers to the cockpit prototype in `claudecode/claudecore/agentdash`, not a deployed service.
+
+## Read-Only Telemetry Consumers (Implemented)
+
+- **Renzo-SimCore → Renzoverse Spine → Renzo-Hacker-Lab (`blue-team`):** `Renzo-Hacker-Lab/blue-team/detection/simcore_monitor.py` consumes `simcore.agent.state` events read-only and emits `blue_team.posture_alert` envelopes (`contract_version: "1"`) without mutating simulation state.
